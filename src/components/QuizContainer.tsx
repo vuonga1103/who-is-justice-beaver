@@ -2,8 +2,9 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
 import { Quote, QUOTES_API_URL } from '../utils/api'
-import Quiz from './Quiz/Quiz'
+import Quiz from './Quiz'
 
+const startQuiz = () => {}
 const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {}
 const getNextQuestion = () => {}
 
@@ -26,13 +27,15 @@ const QuizContainer = () => {
 
   if (error) {
     console.error(error)
-    return <div>Something went wrong</div>
+    return <h1>Something went wrong</h1>
   }
 
   return (
-    <div>
-      <pre>{JSON.stringify({ quotes }, null, 2)}</pre>
-    </div>
+    <Quiz
+      startQuiz={startQuiz}
+      checkAnswer={checkAnswer}
+      getNextQuestion={getNextQuestion}
+    />
   )
 }
 

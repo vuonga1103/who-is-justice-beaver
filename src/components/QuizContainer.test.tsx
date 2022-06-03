@@ -1,21 +1,21 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { rest } from 'msw'
 import { server } from '../mocks/server'
 import { QUOTES_API_URL } from '../utils/api'
 
 import QuizContainer from './QuizContainer'
 
-test('display fetched quotes', async () => {
+test('displays quiz', async () => {
   render(<QuizContainer />)
 
-  const quotes = await screen.findByText(
-    /If I had a gun with two bullets and I was in a room with Hitler, Bin Laden, and Toby, I would shoot Toby twice./
-  )
+  const quiz = await screen.findByRole('heading', {
+    name: /Welcome to Who is Justice Beaver?/i,
+  })
 
-  expect(quotes).toBeInTheDocument()
+  expect(quiz).toBeInTheDocument()
 })
 
-test('should display placeholder if quiz fails to fetch', async () => {
+test('displays placeholder if there is an error', async () => {
   server.use(
     rest.get(QUOTES_API_URL, (req, res, ctx) => {
       return res(ctx.status(500), ctx.json({ error: 'error' }))
@@ -24,6 +24,9 @@ test('should display placeholder if quiz fails to fetch', async () => {
 
   render(<QuizContainer />)
 
-  const error = await screen.findByText(/Something went wrong/)
+  const error = await screen.findByRole('heading', {
+    name: /Something went wrong/i,
+  })
+
   expect(error).toBeInTheDocument()
 })

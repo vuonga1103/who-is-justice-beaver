@@ -7,7 +7,7 @@ type Props = {
   getNextQuestion: () => void
 }
 
-const TITLE = 'Who is Justice Beaver?'
+const TITLE = 'Welcome to Who is Justice Beaver?'
 const SUBTITLE = 'An Office Quiz Game'
 
 const Quiz: React.FC<Props> = ({ startQuiz, checkAnswer, getNextQuestion }) => {
