@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import _ from 'lodash'
 
 import { Quote, QUOTES_API_URL } from '../utils/api'
 import Quiz from './Quiz'
@@ -17,7 +18,7 @@ const QuizContainer = () => {
       return await axios
         .get(QUOTES_API_URL)
         .then(({ data }) => {
-          if (data) setQuotes(data)
+          if (data) setQuotes(_.shuffle(data))
         })
         .catch(error => setError(error.message))
     }

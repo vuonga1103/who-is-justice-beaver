@@ -12,6 +12,7 @@
     "@types/react-dom": "^18.0.5",
     "@types/styled-components": "^5.1.25",
     "axios": "^0.27.2",
+    "lodash": "^4.17.21",
     "msw": "^0.42.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
@@ -43,5 +44,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.182"
   }
 }
