@@ -9,15 +9,25 @@ const getNextQuestion = () => {}
 
 const QuizContainer = () => {
   const [quotes, setQuotes] = useState<Quote[] | []>([])
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    axios
-      .get(QUOTES_API_URL)
-      .then(response => {
-        setQuotes(response.data)
-      })
-      .catch(error => console.log(error))
+    const getQuotes = async () => {
+      return await axios
+        .get(QUOTES_API_URL)
+        .then(({ data }) => {
+          if (data) setQuotes(data)
+        })
+        .catch(error => setError(error.message))
+    }
+
+    getQuotes()
   }, [])
+
+  if (error) {
+    console.error(error)
+    return <div>Something went wrong</div>
+  }
 
   return (
     <div>
