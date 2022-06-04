@@ -53,6 +53,10 @@ const QuizContainer = () => {
       getNextQuestion={() => setCurrentQuoteIdx(prev => prev + 1)}
       totalQuestions={quotes.length}
       currentQuestion={currentQuoteIdx + 1}
+      restartQuiz={() => {
+        setCurrentQuoteIdx(0)
+        setScore(0)
+      }}
     />
   )
 }

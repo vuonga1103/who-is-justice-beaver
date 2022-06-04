@@ -11,6 +11,7 @@ interface Props {
   getNextQuestion: () => void
   totalQuestions: number
   currentQuestion: number
+  restartQuiz: () => void
 }
 
 const getCorrectAnswer = (selectedCharacter: Character, quote: QuoteState) => {
@@ -27,11 +28,18 @@ const Quiz: React.FC<Props> = ({
   getNextQuestion,
   totalQuestions,
   currentQuestion,
+  restartQuiz,
 }) => {
   const [userSelection, setUserSelection] = useState<Character | null>(null)
 
   if (!currentQuote)
-    return <Summary score={score} totalQuestions={totalQuestions} />
+    return (
+      <Summary
+        score={score}
+        totalQuestions={totalQuestions}
+        restartQuiz={restartQuiz}
+      />
+    )
 
   const { content, characters, character } = currentQuote
 

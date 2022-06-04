@@ -1,5 +1,5 @@
-import _ from 'lodash'
 import React from 'react'
+import _ from 'lodash'
 
 import failGifs from '../../../images/fail'
 import passGifs from '../../../images/pass'
@@ -7,9 +7,10 @@ import passGifs from '../../../images/pass'
 interface Props {
   score: number
   totalQuestions: number
+  restartQuiz: () => void
 }
 
-const Summary: React.FC<Props> = ({ score, totalQuestions }) => {
+const Summary: React.FC<Props> = ({ score, totalQuestions, restartQuiz }) => {
   const isPassing = score > 5
   const image = isPassing ? _.sample(passGifs) : _.sample(failGifs)
 
@@ -21,6 +22,7 @@ const Summary: React.FC<Props> = ({ score, totalQuestions }) => {
         {score} out of {totalQuestions}
       </p>
       <img src={image} alt={isPassing ? 'pass' : 'fail'} />
+      <button onClick={restartQuiz}>Try Again</button>
     </>
   )
 }

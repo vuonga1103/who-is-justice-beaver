@@ -41,57 +41,37 @@ const MOCK_QUOTE = {
   ],
 }
 
+const incrementScore = jest.fn()
+const getNextQuestion = jest.fn()
+const restartQuiz = jest.fn()
+
+const quizProps = {
+  currentQuote: MOCK_QUOTE,
+  score: 0,
+  incrementScore,
+  getNextQuestion,
+  totalQuestions: 0,
+  currentQuestion: 0,
+  restartQuiz,
+}
+
 describe('Quiz', () => {
   test('displays a quote', () => {
-    const incrementScore = jest.fn()
-    const getNextQuestion = jest.fn()
+    render(<Quiz {...quizProps} />)
 
-    render(
-      <Quiz
-        currentQuote={MOCK_QUOTE}
-        score={0}
-        incrementScore={incrementScore}
-        getNextQuestion={getNextQuestion}
-        totalQuestions={0}
-        currentQuestion={0}
-      />
-    )
     const quote = screen.getByTestId('quiz-character-quote')
     expect(quote).toBeInTheDocument()
   })
 
   test('displays four character choices', () => {
-    const incrementScore = jest.fn()
-    const getNextQuestion = jest.fn()
+    render(<Quiz {...quizProps} />)
 
-    render(
-      <Quiz
-        currentQuote={MOCK_QUOTE}
-        score={0}
-        incrementScore={incrementScore}
-        getNextQuestion={getNextQuestion}
-        totalQuestions={0}
-        currentQuestion={0}
-      />
-    )
     const characterChoices = screen.getAllByTestId('quiz-character-choice')
     expect(characterChoices.length).toBe(4)
   })
 
   test('on click of a choice, all character choice buttons should be disabled', () => {
-    const incrementScore = jest.fn()
-    const getNextQuestion = jest.fn()
-
-    render(
-      <Quiz
-        currentQuote={MOCK_QUOTE}
-        score={0}
-        incrementScore={incrementScore}
-        getNextQuestion={getNextQuestion}
-        totalQuestions={0}
-        currentQuestion={0}
-      />
-    )
+    render(<Quiz {...quizProps} />)
 
     const characterButtons = screen.getAllByTestId('quiz-character-choice')
     userEvent.click(characterButtons[0])
@@ -99,19 +79,7 @@ describe('Quiz', () => {
   })
 
   test('on click of a choice, next button should appear', () => {
-    const incrementScore = jest.fn()
-    const getNextQuestion = jest.fn()
-
-    render(
-      <Quiz
-        currentQuote={MOCK_QUOTE}
-        score={0}
-        incrementScore={incrementScore}
-        getNextQuestion={getNextQuestion}
-        totalQuestions={0}
-        currentQuestion={0}
-      />
-    )
+    render(<Quiz {...quizProps} />)
 
     const characterButtons = screen.getAllByTestId('quiz-character-choice')
     userEvent.click(characterButtons[0])
@@ -121,19 +89,7 @@ describe('Quiz', () => {
   })
 
   test('on click of a choice, correct answer should appear', () => {
-    const incrementScore = jest.fn()
-    const getNextQuestion = jest.fn()
-
-    render(
-      <Quiz
-        currentQuote={MOCK_QUOTE}
-        score={0}
-        incrementScore={incrementScore}
-        getNextQuestion={getNextQuestion}
-        totalQuestions={0}
-        currentQuestion={0}
-      />
-    )
+    render(<Quiz {...quizProps} />)
 
     const characterButtons = screen.getAllByTestId('quiz-character-choice')
     userEvent.click(characterButtons[0])
@@ -143,19 +99,7 @@ describe('Quiz', () => {
   })
 
   test('on click of a correct choice, score increments by one', () => {
-    const incrementScore = jest.fn()
-    const getNextQuestion = jest.fn()
-
-    render(
-      <Quiz
-        currentQuote={MOCK_QUOTE}
-        score={0}
-        incrementScore={incrementScore}
-        getNextQuestion={getNextQuestion}
-        totalQuestions={0}
-        currentQuestion={0}
-      />
-    )
+    render(<Quiz {...quizProps} />)
 
     const characterButtons = screen.getAllByTestId('quiz-character-choice')
     userEvent.click(characterButtons[2])
@@ -167,19 +111,7 @@ describe('Quiz', () => {
   })
 
   test('on click of next button, next question should appear', () => {
-    const incrementScore = jest.fn()
-    const getNextQuestion = jest.fn()
-
-    render(
-      <Quiz
-        currentQuote={MOCK_QUOTE}
-        score={0}
-        incrementScore={incrementScore}
-        getNextQuestion={getNextQuestion}
-        totalQuestions={0}
-        currentQuestion={0}
-      />
-    )
+    render(<Quiz {...quizProps} />)
 
     const characterButtons = screen.getAllByTestId('quiz-character-choice')
     userEvent.click(characterButtons[0])
@@ -191,19 +123,7 @@ describe('Quiz', () => {
   })
 
   test('displays summary card when the user has completed the quiz', () => {
-    const incrementScore = jest.fn()
-    const getNextQuestion = jest.fn()
-
-    render(
-      <Quiz
-        currentQuote={null}
-        score={0}
-        incrementScore={incrementScore}
-        getNextQuestion={getNextQuestion}
-        totalQuestions={0}
-        currentQuestion={0}
-      />
-    )
+    render(<Quiz {...{ ...quizProps, currentQuote: null }} />)
 
     const summaryCard = screen.getByRole('heading', {
       name: /You have completed the quiz/i,
