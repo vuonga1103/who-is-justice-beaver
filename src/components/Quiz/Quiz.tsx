@@ -35,6 +35,8 @@ const getCorrectAnswer = (selectedCharacter: Character, quote: QuoteState) => {
   return `Incorrect! ${correctAnswer}`
 }
 
+const JUSTICE_BEAVER_URL = 'https://youtu.be/lQszDvVd-pc?t=9'
+
 const Quiz: React.FC<Props> = ({
   currentQuote,
   score,
@@ -73,18 +75,25 @@ const Quiz: React.FC<Props> = ({
 
   return (
     <Wrapper>
-      <HeaderWrapper>
-        <Header>
-          <HeaderTextWrapper>
-            <QuizTitle>Who is Justice Beaver?</QuizTitle>
-            <QuizSubtitle>An Office Quiz Game</QuizSubtitle>
-          </HeaderTextWrapper>
+      <a
+        href={JUSTICE_BEAVER_URL}
+        target="_blank"
+        rel="noreferrer"
+        style={{ textDecoration: 'none' }}
+      >
+        <HeaderWrapper>
+          <Header>
+            <HeaderTextWrapper>
+              <QuizTitle>Who is Justice Beaver?</QuizTitle>
+              <QuizSubtitle>An Office Quiz Game</QuizSubtitle>
+            </HeaderTextWrapper>
 
-          <Logo src={logo} alt="The office logo" />
-        </Header>
-      </HeaderWrapper>
+            <Logo src={logo} alt="The office logo" />
+          </Header>
+        </HeaderWrapper>
+      </a>
       <QuestionNumberWrapper>
-        <WrinkledPaper rotated style={{ padding: '6px 12px' }}>
+        <WrinkledPaper rotation="-10" style={{ padding: '6px 12px' }}>
           Question <span style={{ color: COLORS.Blue }}>{currentQuestion}</span>
           /{totalQuestions}
         </WrinkledPaper>
@@ -92,9 +101,10 @@ const Quiz: React.FC<Props> = ({
 
       <WrinkledPaper
         data-testid="quiz-character-quote"
-        style={{ marginTop: 52, width: '100%', padding: '6px 24px' }}
+        style={{ marginTop: 52, width: '100%', padding: '24px' }}
+        rotation="1"
       >
-        <div style={{ padding: 12 }}>{content}</div>
+        {content}
       </WrinkledPaper>
 
       {characters.map(character => {
