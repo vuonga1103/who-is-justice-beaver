@@ -19,9 +19,8 @@ body {
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  background-image: url(./images/the-office.jpeg);
+  background: url(./images/the-office.jpeg) no-repeat center center fixed;
   background-size: cover;
-  background-position: center;
   display: flex;
   align-items: start;
   justify-content: center;

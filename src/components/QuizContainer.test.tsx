@@ -18,7 +18,7 @@ describe('QuizContainer', () => {
     render(<QuizContainer />)
 
     const quiz = await screen.findByRole('heading', {
-      name: /Welcome to Who is Justice Beaver?/i,
+      name: /Who is Justice Beaver?/i,
     })
 
     expect(quiz).toBeInTheDocument()

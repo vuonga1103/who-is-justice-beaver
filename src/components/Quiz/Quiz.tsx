@@ -1,6 +1,16 @@
 import React, { useState } from 'react'
 
 import { Character, QuoteState } from '../../utilities/types'
+import {
+  HeaderWrapper,
+  Header,
+  Logo,
+  QuizTitle,
+  HeaderTextWrapper,
+  QuizSubtitle,
+  Wrapper,
+} from './quiz-styles'
+import logo from '../../images/logo.png'
 
 import Summary from './Summary'
 
@@ -55,9 +65,20 @@ const Quiz: React.FC<Props> = ({
   }
 
   return (
-    <>
-      <h1>Welcome to Who is Justice Beaver?</h1>
-      <h2>An Office Quiz Game</h2>
+    <Wrapper>
+      <HeaderWrapper>
+        <Header>
+          {/* <span>Welcome to</span>
+          <h2>Who is Justice Beaver?</h2>
+          <span>An Office Quiz Game</span> */}
+          <HeaderTextWrapper>
+            <QuizTitle>Who is Justice Beaver?</QuizTitle>
+            <QuizSubtitle>An Office Quiz Game</QuizSubtitle>
+          </HeaderTextWrapper>
+
+          <Logo src={logo} alt="The office logo" />
+        </Header>
+      </HeaderWrapper>
       Question {currentQuestion} / {totalQuestions}
       <div>
         Score: <span data-testid="quiz-score">{score}</span>
@@ -80,7 +101,7 @@ const Quiz: React.FC<Props> = ({
       {Boolean(userSelection) ? (
         <button onClick={handleNextClick}>Next</button>
       ) : null}
-    </>
+    </Wrapper>
   )
 }
 

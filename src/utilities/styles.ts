@@ -4,6 +4,11 @@ export const COLORS = {
 }
 
 export const FONT_FAMILY = {
-  Primary: "'Roboto', sans-serif",
+  Primary: 'Arial, Helvetica, sans-serif',
   Secondary: "'Courier prime', monospace",
+}
+
+export const BREAKPOINTS = {
+  Mobile: '@media (max-width: 500px)',
+  Tablet: '@media (max-width: 750px)',
 }
