@@ -1,6 +1,7 @@
 export const COLORS = {
   White: '#FFFFFF',
   Black: '#0E0D0D',
+  Blue: '#2F54A5',
 }
 
 export const FONT_FAMILY = {

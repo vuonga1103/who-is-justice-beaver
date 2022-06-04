@@ -9,10 +9,13 @@ import {
   HeaderTextWrapper,
   QuizSubtitle,
   Wrapper,
+  WrinkledPaper,
+  QuestionNumberWrapper,
 } from './quiz-styles'
 import logo from '../../images/logo.png'
 
 import Summary from './Summary'
+import { COLORS } from '../../utilities/styles'
 
 interface Props {
   currentQuote: QuoteState | null
@@ -68,9 +71,6 @@ const Quiz: React.FC<Props> = ({
     <Wrapper>
       <HeaderWrapper>
         <Header>
-          {/* <span>Welcome to</span>
-          <h2>Who is Justice Beaver?</h2>
-          <span>An Office Quiz Game</span> */}
           <HeaderTextWrapper>
             <QuizTitle>Who is Justice Beaver?</QuizTitle>
             <QuizSubtitle>An Office Quiz Game</QuizSubtitle>
@@ -79,11 +79,19 @@ const Quiz: React.FC<Props> = ({
           <Logo src={logo} alt="The office logo" />
         </Header>
       </HeaderWrapper>
-      Question {currentQuestion} / {totalQuestions}
-      <div>
-        Score: <span data-testid="quiz-score">{score}</span>
-      </div>
-      <p data-testid="quiz-character-quote">{content}</p>
+      <QuestionNumberWrapper>
+        <WrinkledPaper rotated>
+          Question <span style={{ color: COLORS.Blue }}>{currentQuestion}</span>
+          /{totalQuestions}
+        </WrinkledPaper>
+      </QuestionNumberWrapper>
+
+      <WrinkledPaper
+        data-testid="quiz-character-quote"
+        style={{ marginTop: 52, width: '100%' }}
+      >
+        <div style={{ padding: 12 }}>{content}</div>
+      </WrinkledPaper>
       {characters.map(character => {
         const { _id, firstname, lastname } = character
         return (
@@ -101,6 +109,10 @@ const Quiz: React.FC<Props> = ({
       {Boolean(userSelection) ? (
         <button onClick={handleNextClick}>Next</button>
       ) : null}
+
+      <div>
+        Score: <span data-testid="quiz-score">{score}</span>
+      </div>
     </Wrapper>
   )
 }
