@@ -41,14 +41,19 @@ const MOCK_QUOTE = {
   ],
 }
 
-const mockIncrementScore = jest.fn()
 describe('Quiz', () => {
   test('displays a quote', () => {
+    const incrementScore = jest.fn()
+    const getNextQuestion = jest.fn()
+
     render(
       <Quiz
         currentQuote={MOCK_QUOTE}
         score={0}
-        incrementScore={mockIncrementScore}
+        incrementScore={incrementScore}
+        getNextQuestion={getNextQuestion}
+        totalQuestions={0}
+        currentQuestion={0}
       />
     )
     const quote = screen.getByTestId('quiz-character-quote')
@@ -56,11 +61,17 @@ describe('Quiz', () => {
   })
 
   test('displays four character choices', () => {
+    const incrementScore = jest.fn()
+    const getNextQuestion = jest.fn()
+
     render(
       <Quiz
         currentQuote={MOCK_QUOTE}
         score={0}
-        incrementScore={mockIncrementScore}
+        incrementScore={incrementScore}
+        getNextQuestion={getNextQuestion}
+        totalQuestions={0}
+        currentQuestion={0}
       />
     )
     const characterChoices = screen.getAllByTestId('quiz-character-choice')
@@ -69,11 +80,17 @@ describe('Quiz', () => {
 
   // also should test placement in test
   test('on click of a choice, all character choice buttons should be disabled', () => {
+    const incrementScore = jest.fn()
+    const getNextQuestion = jest.fn()
+
     render(
       <Quiz
         currentQuote={MOCK_QUOTE}
         score={0}
-        incrementScore={mockIncrementScore}
+        incrementScore={incrementScore}
+        getNextQuestion={getNextQuestion}
+        totalQuestions={0}
+        currentQuestion={0}
       />
     )
 
@@ -83,11 +100,17 @@ describe('Quiz', () => {
   })
 
   test('on click of a choice, next button should appear', () => {
+    const incrementScore = jest.fn()
+    const getNextQuestion = jest.fn()
+
     render(
       <Quiz
         currentQuote={MOCK_QUOTE}
         score={0}
-        incrementScore={mockIncrementScore}
+        incrementScore={incrementScore}
+        getNextQuestion={getNextQuestion}
+        totalQuestions={0}
+        currentQuestion={0}
       />
     )
 
@@ -96,5 +119,53 @@ describe('Quiz', () => {
 
     const nextButton = screen.getByRole('button', { name: 'Next' })
     expect(nextButton).toBeInTheDocument()
+  })
+
+  test('on click of a correct choice, score increments by one', () => {
+    const incrementScore = jest.fn()
+    const getNextQuestion = jest.fn()
+
+    render(
+      <Quiz
+        currentQuote={MOCK_QUOTE}
+        score={0}
+        incrementScore={incrementScore}
+        getNextQuestion={getNextQuestion}
+        totalQuestions={0}
+        currentQuestion={0}
+      />
+    )
+
+    const characterButtons = screen.getAllByTestId('quiz-character-choice')
+    userEvent.click(characterButtons[2])
+
+    const nextButton = screen.getByRole('button', { name: 'Next' })
+    userEvent.click(nextButton)
+
+    expect(incrementScore).toHaveBeenCalledTimes(1)
+  })
+
+  test('on click of next button, next question should appear', () => {
+    const incrementScore = jest.fn()
+    const getNextQuestion = jest.fn()
+
+    render(
+      <Quiz
+        currentQuote={MOCK_QUOTE}
+        score={0}
+        incrementScore={incrementScore}
+        getNextQuestion={getNextQuestion}
+        totalQuestions={0}
+        currentQuestion={0}
+      />
+    )
+
+    const characterButtons = screen.getAllByTestId('quiz-character-choice')
+    userEvent.click(characterButtons[0])
+
+    const nextButton = screen.getByRole('button', { name: 'Next' })
+    userEvent.click(nextButton)
+
+    expect(getNextQuestion).toHaveBeenCalledTimes(1)
   })
 })

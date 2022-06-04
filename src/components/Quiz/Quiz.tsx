@@ -6,19 +6,21 @@ type Props = {
   currentQuote: QuoteState | null
   score: number
   incrementScore: () => void
+  getNextQuestion: () => void
+  totalQuestions: number
+  currentQuestion: number
 }
 
 const TITLE = 'Welcome to Who is Justice Beaver?'
 const SUBTITLE = 'An Office Quiz Game'
 
-// quiz should receive
-// current place in quiz ex. 1/10
-// question, along with answers and correct answers
 const Quiz: React.FC<Props> = ({
   currentQuote,
   score,
   incrementScore,
-  //  startQuiz, checkAnswer, getNextQuestion
+  getNextQuestion,
+  totalQuestions,
+  currentQuestion,
 }) => {
   const [hasSelectionBeenMade, setSelectionMade] = useState(false)
   if (!currentQuote) return null
@@ -29,6 +31,11 @@ const Quiz: React.FC<Props> = ({
     const isCorrect = _id === character._id
     if (isCorrect) incrementScore()
     setSelectionMade(true)
+  }
+
+  const onNextClick = () => {
+    getNextQuestion()
+    setSelectionMade(false)
   }
 
   const characterChoices = characters.map(({ _id, firstname, lastname }) => (
@@ -48,21 +55,15 @@ const Quiz: React.FC<Props> = ({
     <>
       <h1>{TITLE}</h1>
       <h2>{SUBTITLE}</h2>
-
+      Question {currentQuestion} / {totalQuestions}
       <div>
-        <span data-testid="quiz-score">{score}</span>
+        Score: <span data-testid="quiz-score">{score}</span>
       </div>
       <p data-testid="quiz-character-quote">{content}</p>
-
       {characterChoices}
-
-      {hasSelectionBeenMade ? <button>Next</button> : null}
-      {/* <button className="start" onClick={() => {}}>
-        Start:
-      </button>
-      <p className="score">Score:</p>
-      <QuestionCard />
-      <p>Loading Question</p> */}
+      {hasSelectionBeenMade ? (
+        <button onClick={onNextClick}>Next</button>
+      ) : null}
     </>
   )
 }
