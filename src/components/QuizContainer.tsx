@@ -11,6 +11,7 @@ import {
 } from '../utilities/api'
 import { Quote, Character } from '../utilities/types'
 import { ERROR_MESSAGE, formatQuote } from './quiz-utils'
+import { Wrapper } from './quiz-styles'
 
 const QuizContainer = () => {
   const [quotes, setQuotes] = useState<Quote[] | []>([])
@@ -46,18 +47,20 @@ const QuizContainer = () => {
   }
 
   return (
-    <Quiz
-      currentQuote={formatQuote(quotes[currentQuoteIdx], characters)}
-      score={score}
-      incrementScore={() => setScore(prev => prev + 1)}
-      getNextQuestion={() => setCurrentQuoteIdx(prev => prev + 1)}
-      totalQuestions={quotes.length}
-      currentQuestion={currentQuoteIdx + 1}
-      restartQuiz={() => {
-        setCurrentQuoteIdx(0)
-        setScore(0)
-      }}
-    />
+    <Wrapper>
+      <Quiz
+        currentQuote={formatQuote(quotes[currentQuoteIdx], characters)}
+        score={score}
+        incrementScore={() => setScore(prev => prev + 1)}
+        getNextQuestion={() => setCurrentQuoteIdx(prev => prev + 1)}
+        totalQuestions={quotes.length}
+        currentQuestion={currentQuoteIdx + 1}
+        restartQuiz={() => {
+          setCurrentQuoteIdx(0)
+          setScore(0)
+        }}
+      />
+    </Wrapper>
   )
 }
 
