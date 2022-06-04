@@ -3,9 +3,6 @@ import { QuoteState } from '../QuizContainer'
 import QuestionCard from './QuestionCard'
 
 type Props = {
-  // startQuiz: () => void
-  // checkAnswer: (e: React.MouseEvent<HTMLButtonElement>) => void
-  // getNextQuestion: () => void
   currentQuote: QuoteState | null
 }
 

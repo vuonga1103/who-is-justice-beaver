@@ -21,16 +21,20 @@ export type QuoteState = Quote & {
   characters: Character[]
 }
 
-const getCharacters = (
-  characters: Character[],
-  correctCharacter: Character
-) => {
-  const charactersExcludingCorrectCharacter = characters.filter(
-    ({ _id }) => _id !== correctCharacter._id
+const getCharacters = (quote: Quote, characters: Character[]) => {
+  const { character: correctCharacter, content } = quote
+  const filteredCharacters = characters.filter(
+    ({ _id, firstname, lastname }) => {
+      const isCorrectCharacter = _id === correctCharacter._id
+      const isCharacterInQuote =
+        content.includes(firstname) || content.includes(lastname)
+
+      return !isCorrectCharacter && !isCharacterInQuote
+    }
   )
-  const randomThreeCharacters = _.shuffle(
-    charactersExcludingCorrectCharacter
-  ).slice(0, 3)
+
+  const randomThreeCharacters = _.shuffle(filteredCharacters).slice(0, 3)
+
   return _.shuffle([correctCharacter, ...randomThreeCharacters])
 }
 
@@ -40,8 +44,7 @@ const getCurrentQuoteWithCharacters = (
 ) => {
   if (!quote) return null
 
-  const { character: correctCharacter } = quote
-  return { ...quote, characters: getCharacters(characters, correctCharacter) }
+  return { ...quote, characters: getCharacters(quote, characters) }
 }
 
 const QuizContainer = () => {
@@ -81,16 +84,7 @@ const QuizContainer = () => {
     characters
   )
 
-  return (
-    <Quiz
-      currentQuote={currentQuote}
-      // startQuiz={startQuiz}
-      // checkAnswer={checkAnswer}
-      // getNextQuestion={getNextQuestion}
-      // // currentQuote={quotes[currentQuoteIdx]}
-      // // currentQuoteIdx={currentQuoteIdx}
-    />
-  )
+  return <Quiz currentQuote={currentQuote} />
 }
 
 export default QuizContainer
