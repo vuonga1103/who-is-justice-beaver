@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import { rest } from 'msw'
+
 import { server } from '../mocks/server'
 import { CHARACTERS_API_URL, QUOTES_API_URL } from '../utils/api'
 

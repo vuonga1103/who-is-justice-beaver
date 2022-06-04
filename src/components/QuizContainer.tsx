@@ -10,6 +10,7 @@ import {
   getResponseData,
 } from '../utils/api'
 import Quiz from './Quiz'
+import { getCurrentQuoteWithCharacters } from './utils'
 
 const startQuiz = () => {}
 const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {}
@@ -19,32 +20,6 @@ export const ERROR_MESSAGE = 'Something went wrong!'
 
 export type QuoteState = Quote & {
   characters: Character[]
-}
-
-const getCharacters = (quote: Quote, characters: Character[]) => {
-  const { character: correctCharacter, content } = quote
-  const filteredCharacters = characters.filter(
-    ({ _id, firstname, lastname }) => {
-      const isCorrectCharacter = _id === correctCharacter._id
-      const isCharacterInQuote =
-        content.includes(firstname) || content.includes(lastname)
-
-      return !isCorrectCharacter && !isCharacterInQuote
-    }
-  )
-
-  const randomThreeCharacters = _.shuffle(filteredCharacters).slice(0, 3)
-
-  return _.shuffle([correctCharacter, ...randomThreeCharacters])
-}
-
-const getCurrentQuoteWithCharacters = (
-  quote: Quote,
-  characters: Character[]
-) => {
-  if (!quote) return null
-
-  return { ...quote, characters: getCharacters(quote, characters) }
 }
 
 const QuizContainer = () => {
