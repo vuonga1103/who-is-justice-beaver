@@ -189,4 +189,26 @@ describe('Quiz', () => {
 
     expect(getNextQuestion).toHaveBeenCalledTimes(1)
   })
+
+  test('displays summary card when the user has completed the quiz', () => {
+    const incrementScore = jest.fn()
+    const getNextQuestion = jest.fn()
+
+    render(
+      <Quiz
+        currentQuote={null}
+        score={0}
+        incrementScore={incrementScore}
+        getNextQuestion={getNextQuestion}
+        totalQuestions={0}
+        currentQuestion={0}
+      />
+    )
+
+    const summaryCard = screen.getByRole('heading', {
+      name: /You have completed the quiz/i,
+    })
+
+    expect(summaryCard).toBeInTheDocument()
+  })
 })

@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 
 import { Character, QuoteState } from '../../utilities/types'
 
+import Summary from './Summary'
+
 interface Props {
   currentQuote: QuoteState | null
   score: number
@@ -28,7 +30,8 @@ const Quiz: React.FC<Props> = ({
 }) => {
   const [userSelection, setUserSelection] = useState<Character | null>(null)
 
-  if (!currentQuote) return null
+  if (!currentQuote)
+    return <Summary score={score} totalQuestions={totalQuestions} />
 
   const { content, characters, character } = currentQuote
 
