@@ -27,6 +27,7 @@ const QuizContainer = () => {
   const [characters, setCharacters] = useState<Character[] | []>([])
   const [error, setError] = useState<string | null>(null)
   const [currentQuoteIdx, setCurrentQuoteIdx] = useState<number>(0)
+  const [score, setScore] = useState<number>(0)
 
   useEffect(() => {
     const getQuotes = async () => {
@@ -59,7 +60,13 @@ const QuizContainer = () => {
     characters
   )
 
-  return <Quiz currentQuote={currentQuote} />
+  return (
+    <Quiz
+      currentQuote={currentQuote}
+      score={score}
+      incrementScore={() => setScore(prev => prev + 1)}
+    />
+  )
 }
 
 export default QuizContainer

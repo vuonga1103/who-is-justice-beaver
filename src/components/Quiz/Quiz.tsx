@@ -4,6 +4,8 @@ import QuestionCard from './QuestionCard'
 
 type Props = {
   currentQuote: QuoteState | null
+  score: number
+  incrementScore: () => void
 }
 
 const TITLE = 'Welcome to Who is Justice Beaver?'
@@ -14,36 +16,47 @@ const SUBTITLE = 'An Office Quiz Game'
 // question, along with answers and correct answers
 const Quiz: React.FC<Props> = ({
   currentQuote,
+  score,
+  incrementScore,
   //  startQuiz, checkAnswer, getNextQuestion
 }) => {
-  const [areChoicesDisabled, setChoicesDisabled] = useState(false)
+  const [hasSelectionBeenMade, setSelectionMade] = useState(false)
   if (!currentQuote) return null
 
-  const { content, characters } = currentQuote
+  const { content, characters, character } = currentQuote
 
   const handleCharacterClick = (_id: string) => {
-    setChoicesDisabled(true)
+    const isCorrect = _id === character._id
+    if (isCorrect) incrementScore()
+    setSelectionMade(true)
   }
 
   const characterChoices = characters.map(({ _id, firstname, lastname }) => (
     <button
       key={_id}
       data-testid="quiz-character-choice"
-      disabled={areChoicesDisabled}
+      disabled={hasSelectionBeenMade}
       onClick={() => handleCharacterClick(_id)}
     >
       {`${firstname} ${lastname}`}
     </button>
   ))
 
+  console.log(currentQuote)
+
   return (
     <>
       <h1>{TITLE}</h1>
       <h2>{SUBTITLE}</h2>
 
+      <div>
+        <span data-testid="quiz-score">{score}</span>
+      </div>
       <p data-testid="quiz-character-quote">{content}</p>
 
       {characterChoices}
+
+      {hasSelectionBeenMade ? <button>Next</button> : null}
       {/* <button className="start" onClick={() => {}}>
         Start:
       </button>

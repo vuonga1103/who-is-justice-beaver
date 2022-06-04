@@ -41,31 +41,60 @@ const MOCK_QUOTE = {
   ],
 }
 
+const mockIncrementScore = jest.fn()
 describe('Quiz', () => {
   test('displays a quote', () => {
-    render(<Quiz currentQuote={MOCK_QUOTE} />)
+    render(
+      <Quiz
+        currentQuote={MOCK_QUOTE}
+        score={0}
+        incrementScore={mockIncrementScore}
+      />
+    )
     const quote = screen.getByTestId('quiz-character-quote')
     expect(quote).toBeInTheDocument()
   })
 
   test('displays four character choices', () => {
-    render(<Quiz currentQuote={MOCK_QUOTE} />)
+    render(
+      <Quiz
+        currentQuote={MOCK_QUOTE}
+        score={0}
+        incrementScore={mockIncrementScore}
+      />
+    )
     const characterChoices = screen.getAllByTestId('quiz-character-choice')
     expect(characterChoices.length).toBe(4)
   })
 
   // also should test placement in test
   test('on click of a choice, all character choice buttons should be disabled', () => {
-    render(<Quiz currentQuote={MOCK_QUOTE} />)
+    render(
+      <Quiz
+        currentQuote={MOCK_QUOTE}
+        score={0}
+        incrementScore={mockIncrementScore}
+      />
+    )
 
     const characterButtons = screen.getAllByTestId('quiz-character-choice')
     userEvent.click(characterButtons[0])
     characterButtons.forEach(button => expect(button).toBeDisabled())
   })
 
-  test('on click of a choice, next button should appear', () => {})
+  test('on click of a choice, next button should appear', () => {
+    render(
+      <Quiz
+        currentQuote={MOCK_QUOTE}
+        score={0}
+        incrementScore={mockIncrementScore}
+      />
+    )
 
-  test('on click of a correct choice, score should increase by one', () => {})
+    const characterButtons = screen.getAllByTestId('quiz-character-choice')
+    userEvent.click(characterButtons[0])
 
-  test('on click of an incorrect choice, score should stay the same', () => {})
+    const nextButton = screen.getByRole('button', { name: 'Next' })
+    expect(nextButton).toBeInTheDocument()
+  })
 })
