@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { QuoteState } from '../QuizContainer'
-import QuestionCard from './QuestionCard'
 
-type Props = {
+import { Character, QuoteState } from '../../utilities/types'
+
+interface Props {
   currentQuote: QuoteState | null
   score: number
   incrementScore: () => void
@@ -11,8 +11,12 @@ type Props = {
   currentQuestion: number
 }
 
-const TITLE = 'Welcome to Who is Justice Beaver?'
-const SUBTITLE = 'An Office Quiz Game'
+const getCorrectAnswer = (selectedCharacter: Character, quote: QuoteState) => {
+  const isCorrectSelection = selectedCharacter._id === quote.character._id
+  const correctAnswer = `${quote.character.firstname} is the answer.`
+  if (isCorrectSelection) return `Correct! ${correctAnswer}`
+  return `Incorrect! ${correctAnswer}`
+}
 
 const Quiz: React.FC<Props> = ({
   currentQuote,
@@ -22,47 +26,48 @@ const Quiz: React.FC<Props> = ({
   totalQuestions,
   currentQuestion,
 }) => {
-  const [hasSelectionBeenMade, setSelectionMade] = useState(false)
+  const [userSelection, setUserSelection] = useState<Character | null>(null)
+
   if (!currentQuote) return null
 
   const { content, characters, character } = currentQuote
 
-  const handleCharacterClick = (_id: string) => {
-    const isCorrect = _id === character._id
+  const handleCharacterClick = (selectedCharacter: Character) => {
+    const isCorrect = selectedCharacter._id === character._id
     if (isCorrect) incrementScore()
-    setSelectionMade(true)
+    setUserSelection(selectedCharacter)
   }
 
-  const onNextClick = () => {
+  const handleNextClick: React.MouseEventHandler<HTMLButtonElement> = () => {
     getNextQuestion()
-    setSelectionMade(false)
+    setUserSelection(null)
   }
-
-  const characterChoices = characters.map(({ _id, firstname, lastname }) => (
-    <button
-      key={_id}
-      data-testid="quiz-character-choice"
-      disabled={hasSelectionBeenMade}
-      onClick={() => handleCharacterClick(_id)}
-    >
-      {`${firstname} ${lastname}`}
-    </button>
-  ))
-
-  console.log(currentQuote)
 
   return (
     <>
-      <h1>{TITLE}</h1>
-      <h2>{SUBTITLE}</h2>
+      <h1>Welcome to Who is Justice Beaver?</h1>
+      <h2>An Office Quiz Game</h2>
       Question {currentQuestion} / {totalQuestions}
       <div>
         Score: <span data-testid="quiz-score">{score}</span>
       </div>
       <p data-testid="quiz-character-quote">{content}</p>
-      {characterChoices}
-      {hasSelectionBeenMade ? (
-        <button onClick={onNextClick}>Next</button>
+      {characters.map(character => {
+        const { _id, firstname, lastname } = character
+        return (
+          <button
+            key={_id}
+            data-testid="quiz-character-choice"
+            disabled={Boolean(userSelection)}
+            onClick={() => handleCharacterClick(character)}
+          >
+            {`${firstname} ${lastname}`}
+          </button>
+        )
+      })}
+      {userSelection ? getCorrectAnswer(userSelection, currentQuote) : null}
+      {Boolean(userSelection) ? (
+        <button onClick={handleNextClick}>Next</button>
       ) : null}
     </>
   )

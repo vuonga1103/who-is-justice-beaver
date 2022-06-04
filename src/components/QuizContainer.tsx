@@ -1,26 +1,16 @@
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 import _ from 'lodash'
+
+import Quiz from './Quiz'
 
 import {
   CHARACTERS_API_URL,
-  Quote,
-  Character,
   QUOTES_API_URL,
   getResponseData,
-} from '../utils/api'
-import Quiz from './Quiz'
-import { getCurrentQuoteWithCharacters } from './utils'
-
-const startQuiz = () => {}
-const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {}
-const getNextQuestion = () => {}
-
-export const ERROR_MESSAGE = 'Something went wrong!'
-
-export type QuoteState = Quote & {
-  characters: Character[]
-}
+} from '../utilities/api'
+import { Quote, Character } from '../utilities/types'
+import { ERROR_MESSAGE, formatQuote } from './quiz-utils'
 
 const QuizContainer = () => {
   const [quotes, setQuotes] = useState<Quote[] | []>([])
@@ -31,7 +21,7 @@ const QuizContainer = () => {
 
   useEffect(() => {
     const getQuotes = async () => {
-      return await axios
+      await axios
         .get(QUOTES_API_URL)
         .then<Quote[]>(getResponseData)
         .then(data => setQuotes(_.shuffle(data)))
@@ -39,7 +29,7 @@ const QuizContainer = () => {
     }
 
     const getCharacters = async () => {
-      return await axios
+      await axios
         .get(CHARACTERS_API_URL)
         .then<Character[]>(getResponseData)
         .then(data => setCharacters(data))
@@ -55,14 +45,9 @@ const QuizContainer = () => {
     return <h1>{ERROR_MESSAGE}</h1>
   }
 
-  const currentQuote = getCurrentQuoteWithCharacters(
-    quotes[currentQuoteIdx],
-    characters
-  )
-
   return (
     <Quiz
-      currentQuote={currentQuote}
+      currentQuote={formatQuote(quotes[currentQuoteIdx], characters)}
       score={score}
       incrementScore={() => setScore(prev => prev + 1)}
       getNextQuestion={() => setCurrentQuoteIdx(prev => prev + 1)}

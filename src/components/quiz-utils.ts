@@ -1,5 +1,8 @@
 import _ from 'lodash'
-import { Character, Quote } from '../utils/api'
+
+import { Character, Quote } from '../utilities/types'
+
+export const ERROR_MESSAGE = 'Something went wrong!'
 
 export const getCharacters = (quote: Quote, characters: Character[]) => {
   const { character: correctCharacter, content } = quote
@@ -18,10 +21,7 @@ export const getCharacters = (quote: Quote, characters: Character[]) => {
   return _.shuffle([correctCharacter, ...randomThreeCharacters])
 }
 
-export const getCurrentQuoteWithCharacters = (
-  quote: Quote,
-  characters: Character[]
-) => {
+export const formatQuote = (quote: Quote, characters: Character[]) => {
   if (!quote) return null
 
   return { ...quote, characters: getCharacters(quote, characters) }

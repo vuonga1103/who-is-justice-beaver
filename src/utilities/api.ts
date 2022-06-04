@@ -5,17 +5,5 @@ const SHARED_API_URL =
 export const QUOTES_API_URL = `${SHARED_API_URL}quotes`
 export const CHARACTERS_API_URL = `${SHARED_API_URL}characters`
 
-export type Character = {
-  _id: string
-  firstname: string
-  lastname: string
-}
-
-export type Quote = {
-  _id: string
-  content: string
-  character: Character
-}
-
 export const getResponseData = <T = any>({ data }: AxiosResponse): T =>
   data.hasOwnProperty('data') ? data.data : data

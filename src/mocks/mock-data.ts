@@ -1,4 +1,4 @@
-export const MOCK_QUOTES_RESPONSE = [
+export const MOCK_QUOTES = [
   {
     _id: '5e9664cff87ac15464c55f1b',
     content:
@@ -119,7 +119,7 @@ export const MOCK_QUOTES_RESPONSE = [
   },
 ]
 
-export const MOCK_CHARACTERS_RESPONSE = [
+export const MOCK_CHARACTERS = [
   {
     _id: '5e93b4a43af44260882e33b0',
     firstname: 'Michael',

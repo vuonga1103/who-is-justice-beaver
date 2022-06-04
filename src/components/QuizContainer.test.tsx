@@ -1,11 +1,11 @@
 import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
 import { rest } from 'msw'
 
-import { server } from '../mocks/server'
-import { CHARACTERS_API_URL, QUOTES_API_URL } from '../utils/api'
+import QuizContainer from './QuizContainer'
 
-import QuizContainer, { ERROR_MESSAGE } from './QuizContainer'
+import { server } from '../mocks/server'
+import { CHARACTERS_API_URL, QUOTES_API_URL } from '../utilities/api'
+import { ERROR_MESSAGE } from './quiz-utils'
 
 const getMockErrorResponse = (url: string) => {
   return rest.get(url, (req, res, ctx) => {

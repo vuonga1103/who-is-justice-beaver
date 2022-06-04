@@ -78,7 +78,6 @@ describe('Quiz', () => {
     expect(characterChoices.length).toBe(4)
   })
 
-  // also should test placement in test
   test('on click of a choice, all character choice buttons should be disabled', () => {
     const incrementScore = jest.fn()
     const getNextQuestion = jest.fn()
@@ -119,6 +118,28 @@ describe('Quiz', () => {
 
     const nextButton = screen.getByRole('button', { name: 'Next' })
     expect(nextButton).toBeInTheDocument()
+  })
+
+  test('on click of a choice, correct answer should appear', () => {
+    const incrementScore = jest.fn()
+    const getNextQuestion = jest.fn()
+
+    render(
+      <Quiz
+        currentQuote={MOCK_QUOTE}
+        score={0}
+        incrementScore={incrementScore}
+        getNextQuestion={getNextQuestion}
+        totalQuestions={0}
+        currentQuestion={0}
+      />
+    )
+
+    const characterButtons = screen.getAllByTestId('quiz-character-choice')
+    userEvent.click(characterButtons[0])
+
+    const correctAnswer = screen.getByText(/Kevin is the answer./i)
+    expect(correctAnswer).toBeInTheDocument()
   })
 
   test('on click of a correct choice, score increments by one', () => {
