@@ -94,7 +94,6 @@ export const QuizSubtitle = styled.h3`
 export const WrinkledPaper = styled.h4<{ rotated?: boolean }>`
   margin: 24px 0;
   width: fit-content;
-  padding: 6px 24px;
   -webkit-box-shadow: 5px 5px 8px -3px rgba(0, 0, 0, 0.46);
   box-shadow: 5px 5px 8px -3px rgba(0, 0, does 0, 0.46);
   transform: rotate(${props => (props.rotated ? '-10' : '0')}deg);

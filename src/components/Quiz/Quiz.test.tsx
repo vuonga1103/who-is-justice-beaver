@@ -53,6 +53,7 @@ const quizProps = {
   totalQuestions: 0,
   currentQuestion: 0,
   restartQuiz,
+  isGameOver: false,
 }
 
 describe('Quiz', () => {
@@ -123,7 +124,7 @@ describe('Quiz', () => {
   })
 
   test('displays summary card when the user has completed the quiz', () => {
-    render(<Quiz {...{ ...quizProps, currentQuote: null }} />)
+    render(<Quiz {...{ ...quizProps, isGameOver: true }} />)
 
     const summaryCard = screen.getByRole('heading', {
       name: /You have completed the quiz/i,

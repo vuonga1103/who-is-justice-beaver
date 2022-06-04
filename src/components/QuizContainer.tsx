@@ -57,6 +57,7 @@ const QuizContainer = () => {
         setCurrentQuoteIdx(0)
         setScore(0)
       }}
+      isGameOver={Boolean(quotes.length) && currentQuoteIdx === quotes.length}
     />
   )
 }

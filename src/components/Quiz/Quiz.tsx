@@ -25,6 +25,7 @@ interface Props {
   totalQuestions: number
   currentQuestion: number
   restartQuiz: () => void
+  isGameOver: boolean
 }
 
 const getCorrectAnswer = (selectedCharacter: Character, quote: QuoteState) => {
@@ -42,10 +43,11 @@ const Quiz: React.FC<Props> = ({
   totalQuestions,
   currentQuestion,
   restartQuiz,
+  isGameOver,
 }) => {
   const [userSelection, setUserSelection] = useState<Character | null>(null)
 
-  if (!currentQuote)
+  if (isGameOver)
     return (
       <Summary
         score={score}
@@ -53,6 +55,8 @@ const Quiz: React.FC<Props> = ({
         restartQuiz={restartQuiz}
       />
     )
+
+  if (!currentQuote) return null
 
   const { content, characters, character } = currentQuote
 
@@ -80,7 +84,7 @@ const Quiz: React.FC<Props> = ({
         </Header>
       </HeaderWrapper>
       <QuestionNumberWrapper>
-        <WrinkledPaper rotated>
+        <WrinkledPaper rotated style={{ padding: '6px 12px' }}>
           Question <span style={{ color: COLORS.Blue }}>{currentQuestion}</span>
           /{totalQuestions}
         </WrinkledPaper>
@@ -88,10 +92,11 @@ const Quiz: React.FC<Props> = ({
 
       <WrinkledPaper
         data-testid="quiz-character-quote"
-        style={{ marginTop: 52, width: '100%' }}
+        style={{ marginTop: 52, width: '100%', padding: '6px 24px' }}
       >
         <div style={{ padding: 12 }}>{content}</div>
       </WrinkledPaper>
+
       {characters.map(character => {
         const { _id, firstname, lastname } = character
         return (
