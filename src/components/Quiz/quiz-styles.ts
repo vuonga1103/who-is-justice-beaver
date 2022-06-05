@@ -5,7 +5,7 @@ import { BREAKPOINTS, COLORS, FONT_FAMILIES } from '../../utilities/styles'
 export const Wrapper = styled.div`
   margin: 84px 48px;
   padding: 36px;
-  min-height: 760px;
+  min-height: 800px;
   max-width: 900px;
   overflow: auto;
   font-family: ${FONT_FAMILIES.Primary};

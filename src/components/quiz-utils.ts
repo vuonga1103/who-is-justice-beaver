@@ -2,7 +2,7 @@ import _ from 'lodash'
 
 import { Character, Quote } from '../utilities/types'
 
-export const ERROR_MESSAGE = 'Something went wrong!'
+export const ERROR_MESSAGE = 'Something went wrong! Try reloading the page.'
 
 export const getCharacters = (quote: Quote, characters: Character[]) => {
   const { character: correctCharacter, content } = quote

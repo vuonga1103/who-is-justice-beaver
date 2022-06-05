@@ -11,7 +11,8 @@ export const Wrapper = styled.div`
 export const ResultImage = styled.img`
   max-height: 300px;
   max-width: 300px;
-  margin-top: 12px;
+  margin: 12px;
+  border-radius: 10px;
 `
 
 export const TryAgainText = styled.span`
