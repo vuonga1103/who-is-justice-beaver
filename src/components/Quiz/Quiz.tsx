@@ -14,6 +14,7 @@ import {
   Wrapper,
   WrinkledPaper,
   QuestionNumberWrapper,
+  ScoreWrapper,
   CharacterButtonsWrapper,
   RightArrow,
   NextButton,
@@ -114,6 +115,12 @@ const Quiz: React.FC<Props> = ({
         </WrinkledPaper>
       </QuestionNumberWrapper>
 
+      <ScoreWrapper data-testid="quiz-score">
+        <WrinkledPaper rotation="10" style={{ color: COLORS.Blue }}>
+          Score: <span style={{ color: COLORS.Gold }}>{score}</span>
+        </WrinkledPaper>
+      </ScoreWrapper>
+
       <WrinkledPaper
         data-testid="quiz-character-quote"
         style={{ marginTop: 52, width: '100%', padding: '24px' }}
@@ -179,9 +186,7 @@ const Quiz: React.FC<Props> = ({
         </>
       ) : null}
 
-      <div>
-        Score: <span data-testid="quiz-score">{score}</span>
-      </div>
+      {/* <div data-testid="quiz-score">{score}</div> */}
     </Wrapper>
   )
 }

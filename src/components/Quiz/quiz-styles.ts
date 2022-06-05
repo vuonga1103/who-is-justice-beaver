@@ -106,6 +106,13 @@ export const QuestionNumberWrapper = styled.div`
   margin-left: -24px;
 `
 
+export const ScoreWrapper = styled.div`
+  position: absolute;
+  z-index: 1;
+  margin-right: -24px;
+  right: 48px;
+`
+
 export const CharacterButtonsWrapper = styled.div`
   display: flex;
   justify-content: space-between;
