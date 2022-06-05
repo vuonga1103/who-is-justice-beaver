@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import axios from 'axios'
 import _ from 'lodash'
 
@@ -12,7 +12,7 @@ import {
 import { Quote, Character } from '../utilities/types'
 import { ERROR_MESSAGE, formatQuote } from './quiz-utils'
 
-const QuizContainer = () => {
+const QuizContainer: React.FC = () => {
   const [quotes, setQuotes] = useState<Quote[] | []>([])
   const [characters, setCharacters] = useState<Character[] | []>([])
   const [error, setError] = useState<string | null>(null)
@@ -40,6 +40,11 @@ const QuizContainer = () => {
     getCharacters()
   }, [])
 
+  const currentQuote = useMemo(
+    () => formatQuote(quotes[currentQuoteIdx], characters),
+    [quotes, characters, currentQuoteIdx]
+  )
+
   if (error) {
     console.error(error)
     return <h1>{ERROR_MESSAGE}</h1>
@@ -47,7 +52,7 @@ const QuizContainer = () => {
 
   return (
     <Quiz
-      currentQuote={formatQuote(quotes[currentQuoteIdx], characters)}
+      currentQuote={currentQuote}
       score={score}
       incrementScore={() => setScore(prev => prev + 1)}
       getNextQuestion={() => setCurrentQuoteIdx(prev => prev + 1)}
