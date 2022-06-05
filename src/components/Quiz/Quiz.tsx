@@ -14,7 +14,6 @@ import {
   Wrapper,
 } from './quiz-styles'
 import logo from '../../images/logo.png'
-import ProgressBar from './QuizContent/ProgressBar'
 
 interface Props {
   currentQuote: QuoteState | null
