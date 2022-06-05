@@ -38,9 +38,6 @@ const Quiz: React.FC<Props> = ({
   restartQuiz,
   isGameOver,
 }) => {
-  console.log('quiz render')
-  console.log('currentQuote', currentQuote)
-  console.log('----------------')
   return (
     <Wrapper>
       <a
