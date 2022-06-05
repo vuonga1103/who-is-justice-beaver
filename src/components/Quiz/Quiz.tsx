@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import Summary from './Summary'
-import CharacterButton from './CharacterButton'
+import QuizButton from './QuizButton'
 
 import { Character, QuoteState } from '../../utilities/types'
 import {
@@ -32,9 +32,18 @@ interface Props {
 
 const getCorrectAnswer = (selectedCharacter: Character, quote: QuoteState) => {
   const isCorrectSelection = selectedCharacter._id === quote.character._id
-  const correctAnswer = `${quote.character.firstname} is the answer.`
-  if (isCorrectSelection) return `Correct! ${correctAnswer}`
-  return `Incorrect! ${correctAnswer}`
+
+  return (
+    <>
+      {isCorrectSelection ? (
+        <span style={{ color: COLORS.Green }}>Correct!</span>
+      ) : (
+        <span style={{ color: COLORS.Red }}>Incorrect!</span>
+      )}{' '}
+      <span style={{ color: COLORS.Blue }}>{quote.character.firstname}</span> is
+      the answer.
+    </>
+  )
 }
 
 const JUSTICE_BEAVER_URL = 'https://youtu.be/lQszDvVd-pc?t=9'
@@ -95,7 +104,7 @@ const Quiz: React.FC<Props> = ({
         </HeaderWrapper>
       </a>
       <QuestionNumberWrapper>
-        <WrinkledPaper rotation="-10" style={{ padding: '6px 12px' }}>
+        <WrinkledPaper rotation="-10">
           Question <span style={{ color: COLORS.Blue }}>{currentQuestion}</span>
           /{totalQuestions}
         </WrinkledPaper>
@@ -109,12 +118,6 @@ const Quiz: React.FC<Props> = ({
         {content}
       </WrinkledPaper>
 
-      {userSelection ? getCorrectAnswer(userSelection, currentQuote) : null}
-
-      {Boolean(userSelection) ? (
-        <button onClick={handleNextClick}>Next</button>
-      ) : null}
-
       <CharacterButtonsWrapper>
         {characters.map(character => {
           const { _id, firstname, lastname } = character
@@ -122,7 +125,7 @@ const Quiz: React.FC<Props> = ({
           const isSelected = Boolean(userSelection && userSelection._id === _id)
 
           return (
-            <CharacterButton
+            <QuizButton
               key={_id}
               data-testid="quiz-character-choice"
               disabled={Boolean(userSelection)}
@@ -131,10 +134,20 @@ const Quiz: React.FC<Props> = ({
               isCorrect={character._id === currentQuote.character._id}
             >
               {`${firstname} ${lastname}`}
-            </CharacterButton>
+            </QuizButton>
           )
         })}
       </CharacterButtonsWrapper>
+
+      {userSelection ? (
+        <WrinkledPaper rotation="-1" style={{ margin: '24px auto' }}>
+          {getCorrectAnswer(userSelection, currentQuote)}
+        </WrinkledPaper>
+      ) : null}
+
+      {Boolean(userSelection) ? (
+        <button onClick={handleNextClick}>Next</button>
+      ) : null}
 
       <div>
         Score: <span data-testid="quiz-score">{score}</span>

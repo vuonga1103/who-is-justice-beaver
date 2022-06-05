@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
 
 export const Button = styled.button`
   width: 300px;
-  padding: 2px 12px;
+  padding: 8px;
   border: 1px solid ${COLORS.DarkGray};
   border-radius: 4px;
   position: relative;

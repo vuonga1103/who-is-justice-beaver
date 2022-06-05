@@ -1,16 +1,16 @@
 import React from 'react'
 import { COLORS } from '../../../utilities/styles'
-import { Wrapper, Button } from './character-button-styles'
+import { Wrapper, Button } from './quiz-button-styles'
 
 interface Props {
-  disabled: boolean
+  disabled?: boolean
   onClick: () => void
   children: React.ReactNode
-  isSelected: boolean
-  isCorrect: boolean
+  isSelected?: boolean
+  isCorrect?: boolean
 }
 
-const CharacterButton: React.FC<Props> = ({
+const QuizButton: React.FC<Props> = ({
   disabled,
   onClick,
   children,
@@ -30,4 +30,4 @@ const CharacterButton: React.FC<Props> = ({
   )
 }
 
-export default CharacterButton
+export default QuizButton

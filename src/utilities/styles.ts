@@ -7,9 +7,11 @@ export const COLORS = {
   DarkGray: '#5F5D5F',
   LightGreen: '#90EE90',
   LightRed: '#FFCCCB',
+  Red: '#FF6347',
+  Green: '#008000',
 }
 
-export const FONT_FAMILY = {
+export const FONT_FAMILIES = {
   Primary: 'Arial, Helvetica, sans-serif',
   Secondary: "'Courier prime', monospace",
 }

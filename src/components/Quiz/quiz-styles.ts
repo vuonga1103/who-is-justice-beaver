@@ -1,15 +1,15 @@
 import styled from 'styled-components'
 
-import { BREAKPOINTS, COLORS, FONT_FAMILY } from '../../utilities/styles'
+import { BREAKPOINTS, COLORS, FONT_FAMILIES } from '../../utilities/styles'
 import stickyNoteBackground from '../../images/wrinkle-paper.png'
 
 export const Wrapper = styled.div`
   margin: 84px 48px;
   padding: 36px;
-  min-height: 600px;
+  min-height: 760px;
   max-width: 900px;
   overflow: auto;
-  font-family: ${FONT_FAMILY.Primary};
+  font-family: ${FONT_FAMILIES.Primary};
   color: ${COLORS.Black};
   background: rgba(255, 255, 255, 0.7);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
@@ -76,7 +76,7 @@ export const QuizTitle = styled.h2`
     font-size: 2rem;
   }
   ${BREAKPOINTS.Mobile} {
-    font-size: 1rem;
+    font-size: 1.5rem;
   }
 `
 
@@ -87,19 +87,17 @@ export const QuizSubtitle = styled.h3`
   ${BREAKPOINTS.Tablet} {
     font-size: 1rem;
   }
-  ${BREAKPOINTS.Mobile} {
-    font-size: 0.5rem;
-  }
 `
 
 export const WrinkledPaper = styled.h4<{ rotation?: string }>`
+  padding: 6px 12px;
   margin: 24px 0;
   width: fit-content;
   -webkit-box-shadow: 5px 5px 8px -3px rgba(0, 0, 0, 0.46);
   box-shadow: 5px 5px 8px -3px rgba(0, 0, does 0, 0.46);
   transform: rotate(${props => (props.rotation ? props.rotation : '0')}deg);
   background: url(${stickyNoteBackground}) no-repeat;
-  font-family: ${FONT_FAMILY.Secondary};
+  font-family: ${FONT_FAMILIES.Secondary};
 `
 
 export const QuestionNumberWrapper = styled.div`
