@@ -23,7 +23,12 @@ const QuizButton: React.FC<Props> = ({
 
   return (
     <Wrapper>
-      <Button disabled={disabled} onClick={onClick} style={{ backgroundColor }}>
+      <Button
+        disabled={disabled}
+        onClick={onClick}
+        style={{ backgroundColor }}
+        data-testid="quiz-character-choice"
+      >
         {children}
       </Button>
     </Wrapper>

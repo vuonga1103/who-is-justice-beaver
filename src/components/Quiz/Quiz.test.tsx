@@ -1,9 +1,8 @@
 import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
 
 import Quiz from './Quiz'
 
-const MOCK_QUOTE = {
+export const MOCK_QUOTE = {
   _id: '5e9666d76a66e65486e2449e',
   content: 'I am immensely proud of what I did for that turtle!',
   character: {
@@ -57,79 +56,18 @@ const quizProps = {
 }
 
 describe('Quiz', () => {
-  test('displays a quote', () => {
+  test('displays quiz content when game is in play', () => {
     render(<Quiz {...quizProps} />)
-
-    const quote = screen.getByTestId('quiz-character-quote')
-    expect(quote).toBeInTheDocument()
+    const quizContent = screen.getByTestId('quiz-content')
+    expect(quizContent).toBeInTheDocument()
   })
 
-  test('displays four character choices', () => {
-    render(<Quiz {...quizProps} />)
-
-    const characterChoices = screen.getAllByTestId('quiz-character-choice')
-    expect(characterChoices.length).toBe(4)
-  })
-
-  test('on click of a choice, all character choice buttons should be disabled', () => {
-    render(<Quiz {...quizProps} />)
-
-    const characterButtons = screen.getAllByTestId('quiz-character-choice')
-    userEvent.click(characterButtons[0])
-    characterButtons.forEach(button => expect(button).toBeDisabled())
-  })
-
-  test('on click of a choice, next button should appear', () => {
-    render(<Quiz {...quizProps} />)
-
-    const characterButtons = screen.getAllByTestId('quiz-character-choice')
-    userEvent.click(characterButtons[0])
-
-    const nextButton = screen.getByRole('button', { name: 'Next' })
-    expect(nextButton).toBeInTheDocument()
-  })
-
-  test('on click of a choice, correct answer should appear', () => {
-    render(<Quiz {...quizProps} />)
-
-    const characterButtons = screen.getAllByTestId('quiz-character-choice')
-    userEvent.click(characterButtons[0])
-
-    const correctAnswer = screen.getByText(/Kevin is the answer./i)
-    expect(correctAnswer).toBeInTheDocument()
-  })
-
-  test('on click of a correct choice, score increments by one', () => {
-    render(<Quiz {...quizProps} />)
-
-    const characterButtons = screen.getAllByTestId('quiz-character-choice')
-    userEvent.click(characterButtons[2])
-
-    const nextButton = screen.getByRole('button', { name: 'Next' })
-    userEvent.click(nextButton)
-
-    expect(incrementScore).toHaveBeenCalledTimes(1)
-  })
-
-  test('on click of next button, next question should appear', () => {
-    render(<Quiz {...quizProps} />)
-
-    const characterButtons = screen.getAllByTestId('quiz-character-choice')
-    userEvent.click(characterButtons[0])
-
-    const nextButton = screen.getByRole('button', { name: 'Next' })
-    userEvent.click(nextButton)
-
-    expect(getNextQuestion).toHaveBeenCalledTimes(1)
-  })
-
-  test('displays summary card when the user has completed the quiz', () => {
-    render(<Quiz {...{ ...quizProps, isGameOver: true }} />)
-
-    const summaryCard = screen.getByRole('heading', {
+  test('displays summary when game is over', () => {
+    render(<Quiz {...quizProps} isGameOver />)
+    const quizSummary = screen.getByRole('heading', {
       name: /You have completed the quiz/i,
     })
 
-    expect(summaryCard).toBeInTheDocument()
+    expect(quizSummary).toBeInTheDocument()
   })
 })

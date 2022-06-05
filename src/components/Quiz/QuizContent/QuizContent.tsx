@@ -26,7 +26,7 @@ const getCorrectAnswer = (selectedCharacter: Character, quote: QuoteState) => {
   const isCorrectSelection = selectedCharacter._id === quote.character._id
 
   return (
-    <div>
+    <div data-testid="correct-answer">
       {isCorrectSelection ? (
         <span style={{ color: COLORS.Green }}>Correct!</span>
       ) : (
@@ -66,7 +66,7 @@ const QuizContent: React.FC<Props> = ({
   }
 
   return (
-    <>
+    <section data-testid="quiz-content">
       <QuestionNumberWrapper>
         <WrinkledPaper rotation="-10">
           Question <span style={{ color: COLORS.Blue }}>{currentQuestion}</span>
@@ -97,7 +97,6 @@ const QuizContent: React.FC<Props> = ({
           return (
             <QuizButton
               key={_id}
-              data-testid="quiz-character-choice"
               disabled={Boolean(userSelection)}
               onClick={() => handleCharacterClick(character)}
               isSelected={isSelected}
@@ -144,7 +143,7 @@ const QuizContent: React.FC<Props> = ({
           </WrinkledPaper>
         </>
       ) : null}
-    </>
+    </section>
   )
 }
 

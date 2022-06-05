@@ -14,8 +14,6 @@ export const Wrapper = styled.div`
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   backdrop-filter: blur(7px);
   -webkit-backdrop-filter: blur(7px);
-  position: relative;
-
   ${BREAKPOINTS.Mobile} {
     margin: 24px;
     padding: 24px;

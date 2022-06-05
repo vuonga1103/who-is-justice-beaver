@@ -19,12 +19,14 @@ export const QuestionNumberWrapper = styled.div`
   position: absolute;
   z-index: 1;
   margin-left: -24px;
+  margin-top: -48px;
 `
 
 export const ScoreWrapper = styled.div`
   position: absolute;
   z-index: 1;
   margin-right: -24px;
+  margin-top: -48px;
   right: 48px;
 `
 
