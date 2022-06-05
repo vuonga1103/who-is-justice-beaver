@@ -64,10 +64,7 @@ describe('Quiz', () => {
 
   test('displays summary when game is over', () => {
     render(<Quiz {...quizProps} isGameOver />)
-    const quizSummary = screen.getByRole('heading', {
-      name: /You have completed the quiz/i,
-    })
-
+    const quizSummary = screen.getByText(/Your Score/i)
     expect(quizSummary).toBeInTheDocument()
   })
 })
