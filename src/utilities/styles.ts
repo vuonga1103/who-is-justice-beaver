@@ -3,6 +3,10 @@ export const COLORS = {
   Black: '#0E0D0D',
   Blue: '#2F54A5',
   Yellow: '#FFFF88',
+  LightGray: '#E6E4E6',
+  DarkGray: '#5F5D5F',
+  LightGreen: '#90EE90',
+  LightRed: '#FFCCCB',
 }
 
 export const FONT_FAMILY = {

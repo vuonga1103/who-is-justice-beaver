@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 
+import Summary from './Summary'
+import CharacterButton from './CharacterButton'
+
 import { Character, QuoteState } from '../../utilities/types'
 import {
   HeaderWrapper,
@@ -11,10 +14,9 @@ import {
   Wrapper,
   WrinkledPaper,
   QuestionNumberWrapper,
+  CharacterButtonsWrapper,
 } from './quiz-styles'
 import logo from '../../images/logo.png'
-
-import Summary from './Summary'
 import { COLORS } from '../../utilities/styles'
 
 interface Props {
@@ -107,23 +109,32 @@ const Quiz: React.FC<Props> = ({
         {content}
       </WrinkledPaper>
 
-      {characters.map(character => {
-        const { _id, firstname, lastname } = character
-        return (
-          <button
-            key={_id}
-            data-testid="quiz-character-choice"
-            disabled={Boolean(userSelection)}
-            onClick={() => handleCharacterClick(character)}
-          >
-            {`${firstname} ${lastname}`}
-          </button>
-        )
-      })}
       {userSelection ? getCorrectAnswer(userSelection, currentQuote) : null}
+
       {Boolean(userSelection) ? (
         <button onClick={handleNextClick}>Next</button>
       ) : null}
+
+      <CharacterButtonsWrapper>
+        {characters.map(character => {
+          const { _id, firstname, lastname } = character
+          console.log(userSelection)
+          const isSelected = Boolean(userSelection && userSelection._id === _id)
+
+          return (
+            <CharacterButton
+              key={_id}
+              data-testid="quiz-character-choice"
+              disabled={Boolean(userSelection)}
+              onClick={() => handleCharacterClick(character)}
+              isSelected={isSelected}
+              isCorrect={character._id === currentQuote.character._id}
+            >
+              {`${firstname} ${lastname}`}
+            </CharacterButton>
+          )
+        })}
+      </CharacterButtonsWrapper>
 
       <div>
         Score: <span data-testid="quiz-score">{score}</span>

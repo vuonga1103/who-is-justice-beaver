@@ -60,6 +60,7 @@ export const Logo = styled.img`
     display: block;
     width: 75px;
     height: 75px;
+    border: 2px solid ${COLORS.White};
   }
 `
 
@@ -105,4 +106,16 @@ export const QuestionNumberWrapper = styled.div`
   position: absolute;
   z-index: 1;
   margin-left: -24px;
+`
+
+export const CharacterButtonsWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 36px;
+  @media (max-width: 820px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `
