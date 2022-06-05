@@ -17,7 +17,7 @@ const QuizButton: React.FC<Props> = ({
   isSelected,
   isCorrect,
 }) => {
-  let backgroundColor = COLORS.White
+  let backgroundColor
   if (isSelected && isCorrect) backgroundColor = COLORS.LightGreen
   if (isSelected && !isCorrect) backgroundColor = COLORS.LightRed
 

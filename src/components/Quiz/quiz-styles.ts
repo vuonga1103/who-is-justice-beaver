@@ -127,6 +127,9 @@ export const CharacterButtonsWrapper = styled.div`
 
 export const RightArrow = styled.svg`
   fill: ${COLORS.Blue};
+  &:hover {
+    fill: ${COLORS.Green};
+  }
 `
 
 const backAndForthAnimation = keyframes`

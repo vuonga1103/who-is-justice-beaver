@@ -16,16 +16,15 @@ export const Button = styled.button`
   border-radius: 4px;
   position: relative;
   top: -4px;
+  transition: all 100ms ease;
   box-shadow: 2px 4px ${COLORS.DarkGray};
   &:hover:enabled {
     background-color: ${COLORS.LightGray};
     top: -6px;
-    transition: all 100ms ease;
     cursor: pointer;
   }
   &:active:enabled {
     top: 0;
-    transition: all 100ms ease;
     box-shadow: none;
     cursor: pointer;
   }
