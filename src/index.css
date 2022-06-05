@@ -22,7 +22,7 @@ body {
   background: url(./images/the-office.jpeg) no-repeat center center fixed;
   background-size: cover;
   display: flex;
-  align-items: start;
+  align-items: flex-start;
   justify-content: center;
 }
 
