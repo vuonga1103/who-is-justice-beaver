@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 
 import { BREAKPOINTS, COLORS, FONT_FAMILIES } from '../../utilities/styles'
 import stickyNoteBackground from '../../images/wrinkle-paper.png'
@@ -116,4 +116,28 @@ export const CharacterButtonsWrapper = styled.div`
     flex-direction: column;
     align-items: center;
   }
+`
+
+export const RightArrow = styled.svg`
+  fill: ${COLORS.Blue};
+`
+
+const backAndForthAnimation = keyframes`
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(8px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+`
+
+export const NextButton = styled.div`
+  margin-left: 6px;
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+  animation: ${backAndForthAnimation} 1.5s ease-in-out infinite;
 `
