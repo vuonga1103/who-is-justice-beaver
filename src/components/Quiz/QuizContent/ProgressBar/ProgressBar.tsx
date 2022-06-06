@@ -9,7 +9,10 @@ const ProgressBar = ({ progression }: { progression: number }) => {
 
   return (
     <Wrapper>
-      <Progression percentage={progressionPercentage} />
+      <Progression
+        data-testid="progress-bar"
+        percentage={progressionPercentage}
+      />
       <Michael
         src={progressionIcon}
         alt="Progression Icon"
